@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">475 Science Application</string>
+    <string name="application_name">Science App</string>
+    <string name="username_textbox">Username</string>
+    <string name="password_textbox">Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_in">Sign in</string>
+    <string name="add_items">Add Items</string>
+    <string name="textview">TextView</string>
+    <string name="create_account_button">Dont have an account? <u>Create one</u>.</string>
+    <string name="return_to_sign_in">Return to <u>the sign in page</u>.</string>
+    <string name="sensor_list">Sensor List</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="button_for_measuring_volume">Button for measuring volume</string>
+    <string name="SoundMeterDesc">Start collecting sound data</string>
+    <string name="TimerDesc">Start a Timer or something</string>
+    <string name="accelerometer">Accelerometer</string>
+    <string name="sound_meter">Sound Meter</string>
+    <string name="gps">GPS</string>
+    <string name="interval">Interval:</string>
+    <string name="secret_menu_option">Secret Menu Option</string>
+    <string name="change_theme">Change Theme</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="value">Value</string>
+</resources>
