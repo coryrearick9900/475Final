@@ -16,6 +16,10 @@ public class DataPoint {
         this.value = value;
     }
 
+    public DataPoint() {
+
+    }
+
 
 
     public static ArrayList<DataPoint> generateTestList() {

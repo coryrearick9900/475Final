@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,15 +37,15 @@ public class DataGathering extends BaseActivity {
 
     boolean toCollect = false;
 
-
-
-//    XSSFWorkbook wb = new XSSFWorkbook();
-
-    Thread DATA_COLLECTION_THREAD = new Thread();
+    Thread DATA_COLLECTION_THREAD;
+    Runnable r;
 
     private long delay;
 
     ArrayList<DataPoint> datapoints;
+
+    RecyclerView RV;
+    View view;
 
 
 
@@ -68,21 +71,65 @@ public class DataGathering extends BaseActivity {
             }
 
             changeAppHeader(nst);
+
+            datapoints = DataPoint.generateTestList();
+
+            RV = findViewById(R.id.dataRecyclerView);
+
+            DataPointAdapter adapter = new DataPointAdapter(datapoints, this);
+
+            RV.setAdapter(adapter);
+            RV.setLayoutManager(new LinearLayoutManager(this));
+            RV.setHasFixedSize(true);
+
+            Log.d("Test", "About to start the thread");
+//            startThread();
+
+
+            r = () -> {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+
+                Log.d("Test", "Started the thread");
+
+                while (true) {
+
+                    Log.d("Test", "Iterate in the thread");
+
+                    if (toCollect) {
+                        String timestamp = dtf.format(now).toString();
+                        double collectedDataPoint = current.gatherDataPoint();
+
+                        DataPoint newdp = new DataPoint(timestamp, collectedDataPoint);
+                        datapoints.add(newdp);
+                    }
+                }
+            };
+
+            DATA_COLLECTION_THREAD = new Thread(r);
+            DATA_COLLECTION_THREAD.start();
         }
 
-        Log.d("Test", "Entered");
 
 
 
+
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        DATA_COLLECTION_THREAD = null;
+
+        r = null;
     }
 
     public void fuckGoBack(View view) {
         Intent i = new Intent(this, SensorsActivity.class);
         startActivity(i);
-    }
-
-    public void collectDataPoint() {
-        double value = current.gatherDataPoint();
     }
 
     public void changeAppHeader(String sensorName) {
@@ -94,49 +141,20 @@ public class DataGathering extends BaseActivity {
 
     public void startCollection(View view) {
         toCollect = true;
-
-        EditText intervalBox = (EditText) findViewById(R.id.intervalPicker);
-        delay = Long.parseLong(intervalBox.getText().toString());
     }
 
-    public void stopCollection (View view) {
+    public void stopCollection(View view) {
         toCollect = false;
     }
 
-    Runnable startingCollection = new Runnable() {
-
-        @Override
-        public void run() {
-
-
-
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/M/dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            while (toCollect) {
-
-                collectDataPoint();
-
-                try {
-                    this.wait(delay);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                double value = current.gatherDataPoint();
-
-                String timestamp = dtf.format((now));
-                DataPoint newDataPoint = new DataPoint(timestamp, value);
-
-                datapoints.add(newDataPoint);
 
 
 
 
-            }
-        }
 
 
-    };
+
+
 
 
 

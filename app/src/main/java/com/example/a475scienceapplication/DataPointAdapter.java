@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ public class DataPointAdapter extends RecyclerView.Adapter<DataPointAdapter.MyVi
 
     ArrayList<DataPoint> datapoints;
     Context context;
+
 
     public DataPointAdapter(ArrayList<DataPoint> datapoints, Context context) {
         this.datapoints = datapoints;

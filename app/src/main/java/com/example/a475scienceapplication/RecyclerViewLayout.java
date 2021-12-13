@@ -36,26 +36,25 @@ public class RecyclerViewLayout extends AppCompatActivity {
     ArrayList<DataPoint> datapoints;
 
     RecyclerView RV;
+    View view;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.datapoint_layout);
 
-        Log.d("Test", "Entered");
+        Log.d("Test", "Start");
 
         datapoints = DataPoint.generateTestList();
 
         RV = findViewById(R.id.recyclerView);
 
         DataPointAdapter adapter = new DataPointAdapter(datapoints, this);
-        Log.d("Test", "Jalf");
 
         RV.setAdapter(adapter);
         RV.setLayoutManager(new LinearLayoutManager(this));
         RV.setHasFixedSize(true);
 
-        Log.d("Test", "End");
         Log.d("Test", "Datapoints size: " + datapoints.size());
 
     }
