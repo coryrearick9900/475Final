@@ -55,12 +55,12 @@
             android:text="@string/gps" />
 
         <Button
-            android:id="@+id/soundMeterButton"
+            android:id="@+id/gyroscopeButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="selectSensor"
             android:scrollHorizontally="true"
-            android:text="@string/sound_meter" />
+            android:text="@string/gyroscope" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

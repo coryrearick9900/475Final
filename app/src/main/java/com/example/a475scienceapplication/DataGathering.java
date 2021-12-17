@@ -70,6 +70,10 @@ public class DataGathering extends BaseActivity implements SensorEventListener {
                     //current = new Gyroscope(theManager);
                     currentSensor = karen.getDefaultSensor(android.hardware.Sensor.TYPE_GYROSCOPE);
                     break;
+                case "GPS":
+                    Intent i = new Intent(this, MapsActivity.class);
+                    startActivity(i);
+                    break;
                 default:
                     currentSensor = null;
             }
