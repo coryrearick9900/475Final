@@ -1,28 +1,28 @@
 package com.example.a475scienceapplication.sensors;
 
 import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import java.util.ArrayList;
 
-public class Accelerometer extends Sensor implements SensorEventListener {
+public class Gyroscope extends Sensor {
 
-    public Accelerometer(SensorManager newKaren) {
+
+
+    public Gyroscope(SensorManager newKaren) {
+        this.sensorName = "Gyroscope";
         this.karen = newKaren;
-        this.currentSensor = newKaren.getDefaultSensor(android.hardware.Sensor.TYPE_ACCELEROMETER);
+        this.currentSensor = newKaren.getDefaultSensor(android.hardware.Sensor.TYPE_GYROSCOPE);
     }
 
     @Override
     public ArrayList<Float> gatherDataPoint() {
-        return this.value;
+        return null;
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         ArrayList<Float> temp = new ArrayList<>();
-
-        karen.registerListener(this, currentSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
         for (int i = 0; i < 3; i++) {
             Float tempf = new Float(sensorEvent.values[i]);
@@ -32,12 +32,8 @@ public class Accelerometer extends Sensor implements SensorEventListener {
         this.value = temp;
     }
 
-
-
     @Override
     public void onAccuracyChanged(android.hardware.Sensor sensor, int i) {
 
     }
-
-
 }

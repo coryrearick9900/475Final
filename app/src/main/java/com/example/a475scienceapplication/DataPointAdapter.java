@@ -40,8 +40,10 @@ public class DataPointAdapter extends RecyclerView.Adapter<DataPointAdapter.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.timestampView.setText(datapoints.get(position).timestamp);
 
-        double value = datapoints.get(position).value;
-        String valueText = "" + value;
+        DataPoint tempdp = datapoints.get(position);
+        // ArrayList<Float> value = datapoints.get(position).value;
+        //double value = datapoints.get(position).value;
+        String valueText = tempdp.value;
 
         holder.valueView.setText(valueText);
     }
