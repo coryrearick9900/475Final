@@ -3,10 +3,13 @@ package com.example.a475scienceapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +52,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 //                Intent gatheringDataTutorial = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
 //                startActivity(gatheringDataTutorial);
 
+
+
+                // Opens in browser
                 String tutorial = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
                 Intent browser = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_BROWSER);
                 browser.setData(Uri.parse(tutorial));
