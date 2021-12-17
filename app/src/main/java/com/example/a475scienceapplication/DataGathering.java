@@ -2,6 +2,7 @@ package com.example.a475scienceapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.WorkSource;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
@@ -37,15 +38,16 @@ public class DataGathering extends BaseActivity {
 
     boolean toCollect = false;
 
-    Thread DATA_COLLECTION_THREAD;
-    Runnable r;
-
     private long delay;
 
     ArrayList<DataPoint> datapoints;
 
+    TextView theSensorsNameBox;
+
     RecyclerView RV;
     View view;
+
+    DataPointAdapter adapter;
 
 
 
@@ -53,7 +55,7 @@ public class DataGathering extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.data_gathering);
-
+        
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String nst = extras.getString("SensorType");
@@ -69,63 +71,25 @@ public class DataGathering extends BaseActivity {
                     current = new SoundMeter();
                     break;
             }
+            theSensorsNameBox = (TextView) findViewById(R.id.sensorName);
 
             changeAppHeader(nst);
 
-            datapoints = DataPoint.generateTestList();
+            datapoints = new ArrayList<>();
 
             RV = findViewById(R.id.dataRecyclerView);
 
-            DataPointAdapter adapter = new DataPointAdapter(datapoints, this);
+            adapter = new DataPointAdapter(datapoints, this);
 
             RV.setAdapter(adapter);
             RV.setLayoutManager(new LinearLayoutManager(this));
-            RV.setHasFixedSize(true);
+            RV.setHasFixedSize(false);
 
-            Log.d("Test", "About to start the thread");
-//            startThread();
-
-
-            r = () -> {
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-                LocalDateTime now = LocalDateTime.now();
-
-                Log.d("Test", "Started the thread");
-
-                while (true) {
-
-                    Log.d("Test", "Iterate in the thread");
-
-                    if (toCollect) {
-                        String timestamp = dtf.format(now).toString();
-                        double collectedDataPoint = current.gatherDataPoint();
-
-                        DataPoint newdp = new DataPoint(timestamp, collectedDataPoint);
-                        datapoints.add(newdp);
-                    }
-                }
-            };
-
-            DATA_COLLECTION_THREAD = new Thread(r);
-            DATA_COLLECTION_THREAD.start();
         }
 
-
-
-
-
-
-
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
 
-        DATA_COLLECTION_THREAD = null;
-
-        r = null;
-    }
 
     public void fuckGoBack(View view) {
         Intent i = new Intent(this, SensorsActivity.class);
@@ -139,12 +103,22 @@ public class DataGathering extends BaseActivity {
         header.setText(sensorName);
     }
 
-    public void startCollection(View view) {
-        toCollect = true;
-    }
+    public void gatherDataPoint(View view) {
 
-    public void stopCollection(View view) {
-        toCollect = false;
+        DateTimeFormatter thedate = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime thenow = LocalDateTime.now();
+
+        String timestamp = thedate.format(thenow);
+        double datavalue = current.gatherDataPoint();
+
+        DataPoint newdp = new DataPoint(timestamp, datavalue);
+
+        datapoints.add(newdp);
+
+        adapter.notifyItemInserted(datapoints.size());
+
+
+
     }
 
 

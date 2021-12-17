@@ -48,7 +48,9 @@ public class DataPointAdapter extends RecyclerView.Adapter<DataPointAdapter.MyVi
 
     @Override
     public int getItemCount() {
+
         return datapoints.size();
+
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

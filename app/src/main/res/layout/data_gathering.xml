@@ -20,70 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.167" />
 
-    <TableRow
-        android:id="@+id/tableRow"
-        android:layout_width="364dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensorName"
-        app:layout_constraintVertical_bias="0.209">
-
-        <Button
-            android:id="@+id/startStopButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="startCollection"
-            android:text="@string/start" />
-
-        <Space
-            android:layout_width="12dp"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/PauseButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="stopCollection"
-            android:text="@string/pause" />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/intervalSelector"
-        android:layout_width="158dp"
-        android:layout_height="39dp"
-        android:gravity="center_vertical"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/tableRow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensorName"
-        app:layout_constraintVertical_bias="0.367"
-        tools:ignore="RtlCompat">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:gravity="center"
-            android:text="@string/interval"
-            android:textAlignment="viewStart"
-            tools:ignore="RtlCompat" />
-
-        <EditText
-            android:id="@+id/intervalPicker"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="16sp"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-    </TableRow>
-
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
@@ -101,21 +37,23 @@
         android:id="@+id/testButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test"
+        android:text="Gather Data Point"
+        android:onClick="gatherDataPoint"
+        app:layout_constraintBottom_toTopOf="@+id/dataRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableRow" />
+        app:layout_constraintTop_toBottomOf="@+id/sensorName"
+        app:layout_constraintVertical_bias="0.504" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dataRecyclerView"
-        android:layout_width="394dp"
-        android:layout_height="194dp"
+        android:layout_width="409dp"
+        android:layout_height="344dp"
         android:layout_marginStart="9dp"
+        android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/testButton"
-        app:layout_constraintVertical_bias="0.358" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
