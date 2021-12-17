@@ -28,21 +28,23 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+// Displays a google maps
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    // The user must accept that the app uses their location
     private final int REQUEST_LOCATION_PERMISSIONS = 0;
 
+    // Other variables for using the maps fragment
     private GoogleMap mMap;
     private FusedLocationProviderClient mClient;
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
 
+    // onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-        Log.d("Test", "Started");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -77,6 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    // updates the map to show where the user is
     private void updateMap(Location location) {
 
         Log.d("Test", "Trying to update the map");
@@ -98,6 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    // When the map is ready, sets the mMap variable
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;

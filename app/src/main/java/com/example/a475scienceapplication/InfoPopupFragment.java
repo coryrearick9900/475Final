@@ -17,6 +17,8 @@ import java.util.zip.Inflater;
  * A simple {@link Fragment} subclass.
  * Use the {@link InfoPopupFragment#newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * This class is not used at all
  */
 public class InfoPopupFragment extends Fragment {
 

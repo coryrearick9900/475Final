@@ -23,43 +23,32 @@ public class TestUsersPage extends AppCompatActivity implements UserDao{
 
     }
 
-//    private static UserDatabase UserDatabase();
-
+    // Some variable named i
     private int i = 0;
 
-    ArrayList<String> testUsernames = new ArrayList<>();
-    ArrayList<String> testPasswrods = new ArrayList<>();
-
-    // Need to place all the users returned from the db into the layout
-    public void addUserToView() {
-
-    }
-
+    // Sets the arraylist to a new array list
     private ArrayList<User> ListOfUsers = new ArrayList<>();
 
-
+    // Get the user with the specified username and password
     @Override
     public User getUser(String usr, String pw) {
         return null;
     }
 
+    // Inserts a new user to the database
     @Override
     public void InsertUser(User newUser) {
 
     }
 
+    // Deletes a user from the database
     @Override
     public void DeleteUser(User deletedUser) {
 
     }
 
-//    @Override
-//    public ArrayList<User> GetAllUsers() {
-//        ArrayList<User> newList = new ArrayList<>();
-//
-//        return newList;
-//    }
-
+    // Fills the user database with some test users
+    //  Used for testing out the database
     public void fillView(View view) {
 
         LinearLayout placeToAddTexts = (LinearLayout) findViewById(R.id.justUsersList);
@@ -75,12 +64,8 @@ public class TestUsersPage extends AppCompatActivity implements UserDao{
         ListOfUsers.add(user2);
         ListOfUsers.add(user3);
 
-        Log.d("AddItems", "Created Users");
-
 
         for (User current : ListOfUsers) {
-
-            Log.d("AddItems", "Loop iteration");
 
             String display = "User = " + current.getUsername() + ", " + current.getPassword();
 
@@ -93,7 +78,6 @@ public class TestUsersPage extends AppCompatActivity implements UserDao{
 
             placeToAddTexts.addView(newTextView);
 
-            Log.d("AddItems", "Added an item?");
 
 
         }

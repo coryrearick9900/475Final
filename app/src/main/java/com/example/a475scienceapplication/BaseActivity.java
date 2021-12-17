@@ -15,8 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+/**
+ * This is a custom Activity super class to allow for the top bar menu
+ * to appear on all activities without having to manually place the code on all the
+ * activites
+ *
+ */
 public abstract class BaseActivity extends AppCompatActivity {
 
+    // Inflates the topbar menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -24,20 +31,25 @@ public abstract class BaseActivity extends AppCompatActivity {
         return true;
     }
 
+    // Code for each button being pressed
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
+        // Once a button is pressed, determine which button it was
         switch(item.getItemId()) {
+
+            // Button for changing from light to dark theme
             case R.id.changeTheme:
 
-                Log.d("Changing Themes", "Entered");
-
+                // If dark mode, change to light mode
                 if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     setTheme(R.style.LightTheme);
 
                     item.setIcon(R.drawable.is_light_mode);
-                }else {
+                }
+                // if light mode, change to dark mode
+                else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     setTheme(R.style.RedTheme);
 
@@ -48,19 +60,18 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
                 break;
+
+            // Mystery button
             case R.id.secret_menu_option:
-//                Intent gatheringDataTutorial = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
-//                startActivity(gatheringDataTutorial);
 
-
-
-                // Opens in browser
+                // Not sure what this does
                 String tutorial = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
                 Intent browser = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_BROWSER);
                 browser.setData(Uri.parse(tutorial));
                 startActivity(browser);
         }
 
+        // Return out of this method
         return super.onOptionsItemSelected(item);
     }
 }
